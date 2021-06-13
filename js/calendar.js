@@ -56,9 +56,11 @@ function createCalendar (year, month) {
   calendarHtml += '<table>';
 
   // 曜日の行を作成
+  calendarHtml += '<tr class="day-header">';
   for (let i_day = 0; i_day < dayList.length; i_day++) {
-    calendarHtml += '<td>' + dayList[i_day] + '</td>'
+    calendarHtml += '<th>' + dayList[i_day] + '</th>'
   }
+  calendarHtml += '</tr>';
 
   for (let i_week = 0; i_week < 5; i_week++) {
     calendarHtml += '<tr>';

@@ -20,6 +20,25 @@ table {
   border-collapse: collapse;
 }
 
+tr.day-header {
+  background-color: #000;
+  color: #fff;
+}
+
+th {
+  /*border: 1px solid #ddd;*/
+  padding: 5px;
+  text-align: center;
+}
+
+th:first-child {
+  background-color: red;
+}
+
+th:last-child {
+  background-color: royalblue;
+}
+
 td {
   border: 1px solid #ddd;
   padding: 5px;
@@ -34,6 +53,11 @@ td:last-child {
   color: royalblue;
 }
 
+
 td.is-disabled {
   color: #ccc;
+}
+
+td.calendar_td:hover {
+  background-color: rgb(230, 255, 247);
 }
