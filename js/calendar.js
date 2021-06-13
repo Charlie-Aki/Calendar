@@ -15,6 +15,8 @@ showCalendar(year, month);
 document.querySelector('#prev').addEventListener('click', moveCalendar);
 document.querySelector('#refresh').addEventListener('click', moveCalendar);
 document.querySelector('#next').addEventListener('click', moveCalendar);
+document.addEventListener('click', showAlert);
+
 
 // カレンダー複数回表示関数
 function showCalendar (year, month) {
@@ -74,7 +76,8 @@ function createCalendar (year, month) {
       } else {
         // (2)当月の日付
         let num = dayCount;
-        calendarHtml += '<td>' + num + '</td>';
+        // calendarHtml += '<td>' + num + '</td>';
+        calendarHtml += `<td class="calendar_td" data-date="${year}/${month}/${dayCount}">${num}</td>`;
         dayCount++;
       }
     }
@@ -89,6 +92,7 @@ function createCalendar (year, month) {
 function moveCalendar (e) {
   document.querySelector('#calendar').innerHTML = '';
 
+  // 月を戻す
   if (e.target.id === 'prev') {
     month--;
 
@@ -98,11 +102,13 @@ function moveCalendar (e) {
     }
   }
 
+  // 当月にリセット
   if (e.target.id === 'refresh') {
     year = date.getFullYear();
     month = date.getMonth() + 1;
   }
 
+  // 月を進める
   if (e.target.id === 'next') {
     month++;
 
@@ -112,6 +118,14 @@ function moveCalendar (e) {
     }
   }
 
+  // year, monthを更新したものでカレンダーを再描画
   showCalendar(year, month);
 
+}
+
+// クリックした日付をアラート表示する
+function showAlert (e) {
+  if (e.target.classList.contains('calendar_td')) {
+    alert('クリックした日付は' + e.target.dataset.date + 'です');
+  }
 }
