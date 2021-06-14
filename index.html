@@ -5,13 +5,34 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calendar</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <button id="prev" type="button">前の月</button>
-  <button id="refresh" type="button">当月</button>
-  <button id="next" type="button">次の月</button>
-  <div id="calendar"></div>
+  <header>
+    <div class="logo">
+      <a href="./index.html"><img src="./img/logo.png" alt="Calendar"></a>
+    </div>
+    <nav>
+      <ul class="global-nav">
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div id="wrap">
+    <div class="content">
+      <button id="prev" type="button">前の月</button>
+      <button id="refresh" type="button">当月</button>
+      <button id="next" type="button">次の月</button>
+      <div id="calendar"></div>
+    </div>
+  </div>
+  <footer>
+    <small>(C) 2021 Akihiro Kondo</small>
+  </footer>
   <script src="./js/calendar.js"></script>
 </body>
 </html>
