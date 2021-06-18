@@ -119,7 +119,6 @@ table {
   color: #000000;
 }
 
-
 tr.day-header {
   background-color: #000;
   color: #fff;
@@ -152,7 +151,6 @@ td:first-child {
 td:last-child {
   color: royalblue;
 }
-
 
 td.is-disabled {
   color: #ccc;
