@@ -12,17 +12,22 @@ const config = {
 
 // main関数
 showCalendar(year, month);
+/*
 document.querySelector('#prev').addEventListener('click', moveCalendar);
-document.querySelector('#refresh').addEventListener('click', moveCalendar);
+document.querySelector('#init-month').addEventListener('click', moveCalendar);
 document.querySelector('#next').addEventListener('click', moveCalendar);
+*/
+document.querySelector('#prev').addEventListener('click', movePrev);
+document.querySelector('#init-month').addEventListener('click', moveInit);
+document.querySelector('#next').addEventListener('click', moveNext);
 document.addEventListener('click', showAlert);
 
 
 // カレンダー複数回表示関数
 function showCalendar (year, month) {
   for (i_show = 0; i_show < config.show; i_show++) {
-    let calendarHtml = createCalendar(year, month);
-    let sec = document.createElement('section');
+    const calendarHtml = createCalendar(year, month);
+    const sec = document.createElement('section');
     sec.innerHTML = calendarHtml;
     document.querySelector('#calendar').appendChild(sec);
 
@@ -90,6 +95,36 @@ function createCalendar (year, month) {
   return calendarHtml;
 }
 
+function movePrev (e) {
+  document.querySelector('#calendar').innerHTML = '';
+  month--;
+  if (month < 1) {
+    year--;
+    month = 12;
+  }
+  showCalendar(year, month);
+}
+
+function moveInit(e) {
+  document.querySelector('#calendar').innerHTML = '';
+  year = date.getFullYear();
+  month = date.getMonth() + 1;
+  showCalendar(year, month);
+}
+
+function moveNext (e) {
+  document.querySelector('#calendar').innerHTML = '';
+  month++;
+  if (month > 12) {
+    year++;
+    month = 1;
+  }
+  showCalendar(year, month);
+}
+
+
+
+/*
 // 前月,当月,翌月の移動ボタン関数
 function moveCalendar (e) {
   document.querySelector('#calendar').innerHTML = '';
@@ -105,7 +140,7 @@ function moveCalendar (e) {
   }
 
   // 当月にリセット
-  if (e.target.id === 'refresh') {
+  if (e.target.id === 'init-month') {
     year = date.getFullYear();
     month = date.getMonth() + 1;
   }
@@ -124,6 +159,7 @@ function moveCalendar (e) {
   showCalendar(year, month);
 
 }
+*/
 
 // クリックした日付をアラート表示する
 function showAlert (e) {
