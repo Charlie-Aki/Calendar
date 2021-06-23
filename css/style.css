@@ -61,11 +61,11 @@ header {
 }
 
 .global-nav li a {
-  color: #ffffff;
+  color: #fff;
 }
 
 .global-nav li a:hover {
-  border-bottom: 2px solid #ffffff;
+  border-bottom: 2px solid #fff;
   padding-bottom: 3px;
   text-decoration: none;
 }
@@ -105,11 +105,23 @@ h1 {
 
 #calendar {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
+/*  position: absolute;*/
 }
 
 section {
   margin: 10px;
+}
+
+#calendar section {
+  padding: 30px;
+  background-color: rgb(255, 235, 198);
+  border-radius: 30px;
+}
+
+section h1 {
+  margin-bottom: 0;
 }
 
 table {
@@ -124,21 +136,28 @@ tr.day-header {
   color: #fff;
 }
 
+
 th {
-  /*border: 1px solid #ddd;*/
+  /* height: 3rem; */
+  /* width: 3rem; */
+  border: 1px solid #000;
   padding: 5px;
   text-align: center;
 }
 
 th:first-child {
+  border: 1px solid red;
   background-color: red;
 }
 
 th:last-child {
+  border: 1px solid royalblue;
   background-color: royalblue;
 }
 
 td {
+  /* height: 3rem; */
+  /* idth: 3rem; */
   border: 1px solid #ddd;
   padding: 5px;
   text-align: center;

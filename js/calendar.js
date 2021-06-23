@@ -67,7 +67,7 @@ function createCalendar (year, month) {
   }
   calendarHtml += '</tr>';
 
-  for (let i_week = 0; i_week < 5; i_week++) {
+  for (let i_week = 0; i_week < 6; i_week++) {
     calendarHtml += '<tr>';
 
     for (let i_day = 0; i_day < dayList.length; i_day++) {
