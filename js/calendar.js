@@ -20,8 +20,9 @@ document.querySelector('#next').addEventListener('click', moveCalendar);
 document.querySelector('#prev').addEventListener('click', movePrev);
 document.querySelector('#init-month').addEventListener('click', moveInit);
 document.querySelector('#next').addEventListener('click', moveNext);
-document.addEventListener('click', showAlert);
-
+//
+document.addEventListener('click', displayModalWindow);
+setSwipe('#calendar');
 
 // カレンダー複数回表示関数
 function showCalendar (year, month) {
@@ -161,9 +162,89 @@ function moveCalendar (e) {
 }
 */
 
+
+// スワイプイベント設定
+function setSwipe(elem) {
+  let t = document.querySelector(elem);
+  let startX; // タッチ開始 x座標
+  // let startY; // タッチ開始 y座標
+  let moveX; // スワイプ中の x座標
+  // let moveY; // スワイプ中の y座標
+  const dist = 30; // スワイプを感知する最低距離（ピクセル単位）
+
+  // タッチ開始時： xy座標を取得
+  t.addEventListener("touchstart", function (e) {
+    e.preventDefault();
+    startX = e.touches[0].clientX;
+    moveX = e.changedTouches[0].clientX;
+    // startY = e.touches[0].clientY;
+    // moveY = e.changedTouches[0].clientY;
+  });
+
+  // スワイプ中： xy座標を取得
+  t.addEventListener("touchmove", function (e) {
+    e.preventDefault();
+    moveX = e.changedTouches[0].clientX;
+    // moveY = e.changedTouches[0].clientY;
+  });
+
+  // タッチ終了時： スワイプした距離から左右どちらにスワイプしたかを判定する/距離が短い場合何もしない
+  t.addEventListener("touchend", function (e) {
+    e.preventDefault();
+    // console.log(startX);
+    // console.log(moveX);
+    if (Math.abs(startX - moveX) <= dist) {
+      return;
+    } else if (startX > moveX && Math.abs(startX - moveX) > dist) { // 右から左にスワイプ
+      // 右から左にスワイプした時の処理
+      movePrev();
+    } else if (startX < moveX && Math.abs(startX - moveX) > dist) { // 左から右にスワイプ
+      // 左から右にスワイプした時の処理
+      moveNext();
+    }
+  });
+}
+
+
 // クリックした日付をアラート表示する
-function showAlert (e) {
+// function showAlert (e) {
+//   if (e.target.classList.contains('calendar_td')) {
+//     alert('クリックした日付は' + e.target.dataset.date + 'です');
+//   }
+// }
+
+
+/* モーダルウィンドウを表示する */
+function displayModalWindow (e) {
   if (e.target.classList.contains('calendar_td')) {
-    alert('クリックした日付は' + e.target.dataset.date + 'です');
+    // モーダルウィンドウを生成する
+    const modalElement = document.createElement('div');
+    // modalクラスを付与する
+    modalElement.classList.add('modal');
+
+    // モーダルウィンドウの内部要素を生成する
+    const innerElement = document.createElement('div');
+    innerElement.classList.add('inner');
+    innerElement.innerHTML = `
+      <p>クリックした日付は
+      `
+      + e.target.dataset.date +
+      `
+      です</p>
+      `;
+    modalElement.appendChild(innerElement);
+
+    // body要素にモーダルウィンドウを配置する
+    document.body.appendChild(modalElement);
+
+    // 内部要素をクリックしたらモーダルウィンドウを削除する処理
+    innerElement.addEventListener('click', () => {
+      closeModalWindow(modalElement);
+    });
   }
+}
+
+/* モーダルウィンドウを閉じる */
+function closeModalWindow (modalElement) {
+  document.body.removeChild(modalElement);
 }
