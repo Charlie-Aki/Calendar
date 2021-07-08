@@ -22,6 +22,7 @@ document.querySelector('#init-month').addEventListener('click', moveInit);
 document.querySelector('#next').addEventListener('click', moveNext);
 //
 document.addEventListener('click', displayModalWindow);
+document.addEventListener('touchend', displayModalWindow);
 setSwipe('#calendar');
 
 // カレンダー複数回表示関数
@@ -176,7 +177,8 @@ function setSwipe(elem) {
   t.addEventListener("touchstart", function (e) {
     e.preventDefault();
     startX = e.touches[0].clientX;
-    moveX = e.changedTouches[0].clientX;
+    // moveXの初期値化(動いていないのでstartXと同じ値)
+    moveX = startX;//e.changedTouches[0].clientX;
     // startY = e.touches[0].clientY;
     // moveY = e.changedTouches[0].clientY;
   });
@@ -248,3 +250,8 @@ function displayModalWindow (e) {
 function closeModalWindow (modalElement) {
   document.body.removeChild(modalElement);
 }
+
+
+
+/* カレンダーを指の動きに合わせて左右動かす */
+//CSSのtable要素に対してstyle.left = {startX-moveX}pxの値を持たせる
